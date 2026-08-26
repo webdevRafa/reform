@@ -57,7 +57,7 @@ export function SiteLayout() {
               Find my program <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-          <button type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen((value) => !value)} className="grid size-11 place-items-center rounded-full border border-black/10 lg:hidden">
+          <button type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-controls="mobile-navigation" aria-expanded={open} onClick={() => setOpen((value) => !value)} className="grid size-11 place-items-center rounded-full border border-black/10 lg:hidden">
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
@@ -65,18 +65,20 @@ export function SiteLayout() {
           {open && (
             <motion.div
               key="mobile-navigation"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.36, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden lg:hidden"
+              id="mobile-navigation"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.24 }}
+              className="absolute inset-x-0 top-full h-[calc(100dvh-78px)] overflow-y-auto overscroll-contain bg-black/25 backdrop-blur-[2px] lg:hidden"
             >
+              <button type="button" tabIndex={-1} aria-label="Close navigation menu" onClick={() => setOpen(false)} className="absolute inset-0 size-full cursor-default" />
               <motion.div
-                initial={{ y: -14 }}
+                initial={{ y: -18, opacity: 0 }}
                 animate={{ y: 0 }}
-                exit={{ y: -10 }}
+                exit={{ y: -14, opacity: 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.36, ease: [0.22, 1, 0.36, 1] }}
-                className="border-t border-black/8 bg-[#f4f4ef] px-5 pb-7 pt-4"
+                className="relative z-10 border-t border-black/8 bg-[#f4f4ef] px-5 pb-[calc(1.75rem+env(safe-area-inset-bottom))] pt-4 shadow-[0_24px_55px_rgba(17,23,22,0.18)]"
               >
                 <nav className="grid gap-1" aria-label="Mobile navigation">
                   {navItems.map((item) => <NavLink key={item.to} to={item.to} onClick={() => setOpen(false)} className="border-b border-black/7 py-4 text-2xl font-black uppercase tracking-[-0.04em]">{item.label}</NavLink>)}
