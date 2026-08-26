@@ -88,7 +88,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section-space bg-[#101817] text-white">
+      <section className="training-backdrop-section section-space text-white">
         <div className="mx-auto max-w-[1480px] px-5 sm:px-8 lg:px-12">
           <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div><p className="eyebrow text-[#65dbe3]">Choose your pathway</p><h2 className="section-title mt-5 max-w-4xl">Not a random workout. A clear way forward.</h2></div>
