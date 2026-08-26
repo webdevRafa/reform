@@ -75,7 +75,7 @@ export function SiteLayout() {
               <button type="button" tabIndex={-1} aria-label="Close navigation menu" onClick={() => setOpen(false)} className="absolute inset-0 size-full cursor-default" />
               <motion.div
                 initial={{ y: -18, opacity: 0 }}
-                animate={{ y: 0 }}
+                animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -14, opacity: 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.36, ease: [0.22, 1, 0.36, 1] }}
                 className="relative z-10 border-t border-black/8 bg-[#f4f4ef] px-5 pb-[calc(1.75rem+env(safe-area-inset-bottom))] pt-4 shadow-[0_24px_55px_rgba(17,23,22,0.18)]"
