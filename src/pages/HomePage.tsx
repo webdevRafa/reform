@@ -24,9 +24,9 @@ export function HomePage() {
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="eyebrow mb-8">
             <span className="h-px w-8 bg-[#00a6b4]" /> The bridge from recovery to strength
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.07, ease: [0.22, 1, 0.36, 1] }} className="max-w-[760px] text-[clamp(3.9rem,7.8vw,5.9rem)] font-extrabold uppercase leading-[0.93]">
+          <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.07, ease: [0.22, 1, 0.36, 1] }} className="section-title max-w-[760px]">
             Feel better.
-            <span className="mt-3 block text-[#009aaa]">Become strong.</span>
+            <span className="mt-2 block text-[#009aaa]">Become strong.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18 }} className="mt-8 max-w-2xl text-lg leading-relaxed text-[#4f5d5b] sm:text-xl lg:text-[1.3rem]">
             You are feeling better. Now let&apos;s build the strength, capacity, and confidence to get you back to exercise—and keep you there.
@@ -140,7 +140,7 @@ export function HomePage() {
         <Reveal className="relative overflow-hidden rounded-[2.4rem] bg-[#00a6b4] px-6 py-16 text-white sm:px-12 lg:px-20 lg:py-24">
           <div className="absolute -right-40 -top-52 size-[42rem] rounded-full border-[120px] border-white/10" />
           <Sparkles className="size-8" />
-          <h2 className="relative mt-8 max-w-5xl text-[clamp(3rem,6vw,6.4rem)] font-black uppercase leading-[0.88] tracking-[-0.07em]">Your body is ready for a next step. Let&apos;s find it.</h2>
+          <h2 className="section-title relative mt-8 max-w-5xl">Your body is ready for a next step. Let&apos;s find it.</h2>
           <div className="relative mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"><Link to="/assessment" className="button-dark">Take the 2-minute assessment <ArrowRight className="size-5" /></Link><p className="text-sm text-white/75">No commitment. Just a clearer starting point.</p></div>
         </Reveal>
       </section>

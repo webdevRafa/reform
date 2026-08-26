@@ -16,7 +16,7 @@ export function ProgramDetailPage() {
         <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <Reveal>
             <p className="eyebrow">{program.eyebrow}</p>
-            <h1 className="mt-6 text-[clamp(3.9rem,7vw,7rem)] font-black leading-[0.88] tracking-[-0.065em]">{program.name}</h1>
+            <h1 className="page-title mt-6">{program.name}</h1>
             <p className="mt-8 max-w-xl text-xl leading-relaxed text-[#52605d]">{program.shortDescription}</p>
             <div className="mt-9 flex flex-wrap gap-3 text-sm font-semibold"><span className="detail-pill"><Clock3 className="size-4" />{program.weeks} weeks</span><span className="detail-pill"><Dumbbell className="size-4" />{program.sessionsPerWeek} sessions/week</span><span className="detail-pill"><TrendingUp className="size-4" />Progressive</span></div>
             <Link to="/assessment" className="button-primary mt-9 w-fit">Start with {program.name} <ArrowRight className="size-5" /></Link>
@@ -25,10 +25,10 @@ export function ProgramDetailPage() {
         </div>
       </section>
 
-      <section className="section-space bg-white">
-        <div className="mx-auto grid max-w-[1480px] gap-12 px-5 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:px-12">
-          <Reveal><p className="eyebrow">The pathway</p><h2 className="section-title mt-5">Build capacity without rushing the process.</h2><p className="mt-6 text-lg leading-relaxed text-[#596662]">{program.description}</p><div className="mt-8 rounded-2xl bg-[#eef2ef] p-6"><p className="text-xs font-bold uppercase tracking-[0.14em] text-[#008b98]">Designed for</p><p className="mt-3 leading-relaxed text-[#4f5d5b]">{program.audience}</p></div></Reveal>
-          <Reveal delay={0.08} className="grid content-start gap-3">{program.features.map((feature, index) => <div key={feature} className="flex items-center gap-4 border-b border-black/8 py-5"><span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#daf2f0] text-[#008b98]"><Check className="size-5" /></span><div><p className="font-bold">{feature}</p><p className="mt-1 text-sm text-[#76807e]">Built into your {program.weeks}-week progression</p></div><span className="ml-auto text-xs text-black/25">0{index + 1}</span></div>)}</Reveal>
+      <section className="bg-white py-20 sm:py-24 lg:py-24">
+        <div className="mx-auto grid max-w-[1380px] gap-12 px-5 sm:px-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-center lg:gap-20 lg:px-12">
+          <Reveal className="max-w-[680px]"><p className="eyebrow">The pathway</p><h2 className="panel-title mt-5">Build capacity without rushing the process.</h2><p className="mt-6 text-lg leading-relaxed text-[#596662]">{program.description}</p><div className="mt-8 rounded-2xl bg-[#eef2ef] p-6"><p className="text-xs font-bold uppercase tracking-[0.14em] text-[#008b98]">Designed for</p><p className="mt-3 leading-relaxed text-[#4f5d5b]">{program.audience}</p></div></Reveal>
+          <Reveal delay={0.08} className="grid content-center gap-3 lg:w-full lg:max-w-[620px] lg:justify-self-end">{program.features.map((feature, index) => <div key={feature} className="flex items-center gap-4 border-b border-black/8 py-5"><span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#daf2f0] text-[#008b98]"><Check className="size-5" /></span><div><p className="font-bold">{feature}</p><p className="mt-1 text-sm text-[#76807e]">Built into your {program.weeks}-week progression</p></div><span className="ml-auto text-xs text-black/25">0{index + 1}</span></div>)}</Reveal>
         </div>
       </section>
 
