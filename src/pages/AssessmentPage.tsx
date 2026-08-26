@@ -87,7 +87,7 @@ export function AssessmentPage() {
           {!complete && question ? (
             <motion.section key={question.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }}>
               <p className="eyebrow text-[#65dce4]">Step {step + 1} of {questions.length} · {question.eyebrow}</p>
-              <h1 className="mt-6 max-w-4xl text-[clamp(2.8rem,6vw,5.5rem)] font-black leading-[0.96] tracking-[-0.055em]">{question.question}</h1>
+              <h1 className="mt-6 max-w-4xl text-[clamp(2.8rem,5vw,4.75rem)] font-black leading-[0.98] tracking-[-0.05em]">{question.question}</h1>
               {question.description && <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/55">{question.description}</p>}
               <div className="mt-10 grid gap-3 sm:grid-cols-2">
                 {question.options.map((option) => (

@@ -12,6 +12,8 @@ const principles = [
   { number: '03', title: 'Progress with proof', copy: 'Track readiness, effort, and confidence so the next step is clear—not a guess.' },
 ]
 
+const marqueeItems = ['Move with confidence', 'Progress at your pace', 'Understand your body', 'Build strength for life']
+
 export function HomePage() {
   const { programs } = useCatalog()
   const publishedPrograms = programs.filter((program) => program.status === 'published').slice(0, 3)
@@ -22,7 +24,7 @@ export function HomePage() {
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="eyebrow mb-8">
             <span className="h-px w-8 bg-[#00a6b4]" /> The bridge from recovery to strength
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.07, ease: [0.22, 1, 0.36, 1] }} className="max-w-[860px] text-[clamp(3.9rem,7.8vw,8.5rem)] font-extrabold uppercase leading-[0.91]">
+          <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.07, ease: [0.22, 1, 0.36, 1] }} className="max-w-[760px] text-[clamp(3.9rem,7.8vw,5.9rem)] font-extrabold uppercase leading-[0.93]">
             Feel better.
             <span className="mt-3 block text-[#009aaa]">Become strong.</span>
           </motion.h1>
@@ -60,11 +62,15 @@ export function HomePage() {
         </motion.div>
       </section>
 
-      <div className="border-y border-black/8 bg-white py-4">
-        <div className="marquee-track flex w-max items-center gap-8 whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] text-[#49615e]">
-          {[...Array(2)].flatMap((_, set) => ['Move with confidence', 'Progress at your pace', 'Understand your body', 'Build strength for life'].map((item) => (
-            <span key={`${set}-${item}`} className="flex items-center gap-8"><span>{item}</span><span className="size-1.5 rounded-full bg-[#00a6b4]" /></span>
-          )))}
+      <div className="overflow-hidden border-y border-black/8 bg-white py-4">
+        <div aria-hidden="true" className="marquee-track flex w-max whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] text-[#49615e]">
+          {[0, 1].map((set) => (
+            <div key={set} className="flex min-w-screen shrink-0 items-center justify-around gap-8 pr-8">
+              {marqueeItems.map((item) => (
+                <span key={`${set}-${item}`} className="flex shrink-0 items-center gap-8"><span>{item}</span><span className="size-1.5 rounded-full bg-[#00a6b4]" /></span>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
 

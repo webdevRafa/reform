@@ -23,6 +23,7 @@ a { text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .marquee-track { animation: none !important; transform: none !important; }
 }
 
 @layer components {
@@ -30,7 +31,7 @@ a { text-decoration: none; }
   .section-space { @apply py-20 sm:py-24 lg:py-32; }
   .section-title { @apply text-[clamp(2.8rem,5.4vw,5.8rem)] font-extrabold leading-[0.98]; }
   .page-hero { @apply py-20 sm:py-24 lg:py-32; }
-  .page-title { @apply text-[clamp(3.5rem,7.2vw,7.8rem)] font-extrabold leading-[0.93]; }
+  .page-title { @apply text-[clamp(3.5rem,5vw,5.6rem)] font-extrabold leading-[0.96]; }
   .button-primary { @apply inline-flex items-center justify-center gap-3 rounded-full bg-[#00a6b4] px-7 py-4 text-base font-bold text-white shadow-[0_18px_50px_rgba(0,166,180,.2)] transition hover:-translate-y-0.5 hover:bg-[#008d9a]; }
   .button-secondary { @apply inline-flex items-center justify-center gap-3 rounded-full border border-[#b9c5c2] px-7 py-4 text-base font-bold transition hover:border-[#00a6b4] hover:text-[#008793]; }
   .button-dark { @apply inline-flex items-center justify-center gap-3 rounded-full bg-[#101817] px-7 py-4 text-base font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#24312f]; }
@@ -62,8 +63,13 @@ a { text-decoration: none; }
 .admin-field textarea:focus,
 .admin-field select:focus { border-color: #00a6b4; box-shadow: 0 0 0 3px rgba(0, 166, 180, 0.1); }
 
-.marquee-track { animation: marquee 26s linear infinite; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track {
+  animation: marquee-scroll 30s linear infinite;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+@keyframes marquee-scroll { to { transform: translate3d(-50%, 0, 0); } }
 
 @media (max-width: 640px) {
   .page-title { line-height: 0.98; }

@@ -16,7 +16,7 @@ export function ProgramDetailPage() {
         <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <Reveal>
             <p className="eyebrow">{program.eyebrow}</p>
-            <h1 className="mt-6 text-[clamp(4.8rem,10vw,9.8rem)] font-black leading-[0.82] tracking-[-0.08em]">{program.name}</h1>
+            <h1 className="mt-6 text-[clamp(3.9rem,7vw,7rem)] font-black leading-[0.88] tracking-[-0.065em]">{program.name}</h1>
             <p className="mt-8 max-w-xl text-xl leading-relaxed text-[#52605d]">{program.shortDescription}</p>
             <div className="mt-9 flex flex-wrap gap-3 text-sm font-semibold"><span className="detail-pill"><Clock3 className="size-4" />{program.weeks} weeks</span><span className="detail-pill"><Dumbbell className="size-4" />{program.sessionsPerWeek} sessions/week</span><span className="detail-pill"><TrendingUp className="size-4" />Progressive</span></div>
             <Link to="/assessment" className="button-primary mt-9 w-fit">Start with {program.name} <ArrowRight className="size-5" /></Link>

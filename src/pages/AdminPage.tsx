@@ -1,9 +1,11 @@
 import { ArrowLeft, BarChart3, BookOpen, CircleDollarSign, CloudUpload, Edit3, Eye, FileVideo, Image as ImageIcon, LayoutDashboard, LoaderCircle, LogIn, LogOut, Menu, PackagePlus, Plus, Save, Search, Settings, Trash2, Users, X } from 'lucide-react'
 import { onAuthStateChanged, signInWithPopup, signOut, type User } from 'firebase/auth'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BrandLogo } from '../components/BrandLogo'
 import { starterPrograms } from '../data/programs'
+import { useSmartHeader } from '../hooks/useSmartHeader'
 import { publishStarterCatalog, removeProgram, saveProgram, subscribeToPrograms, uploadProgramAsset } from '../lib/catalog'
 import { auth, googleProvider, isFirebaseConfigured } from '../lib/firebase'
 import type { Lesson, Program, ProgramKind } from '../types'
@@ -30,6 +32,8 @@ function slugify(value: string) {
 export function AdminPage() {
   const [view, setView] = useState<AdminView>('overview')
   const [menuOpen, setMenuOpen] = useState(false)
+  const reduceMotion = useReducedMotion()
+  const { visible: headerVisible, show: showHeader } = useSmartHeader(menuOpen)
   const [programs, setPrograms] = useState<Program[]>(starterPrograms)
   const [catalogSource, setCatalogSource] = useState<'firestore' | 'starter'>('starter')
   const [selected, setSelected] = useState<Program | null>(null)
@@ -58,6 +62,17 @@ export function AdminPage() {
     setPrograms(starterPrograms)
     setCatalogSource('starter')
   }), [])
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') setMenuOpen(false) }
+    const onResize = () => { if (window.innerWidth >= 1024) setMenuOpen(false) }
+    window.addEventListener('keydown', onKeyDown)
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [menuOpen])
 
   const filteredPrograms = useMemo(() => programs.filter((program) => `${program.name} ${program.eyebrow} ${program.kind}`.toLowerCase().includes(search.toLowerCase())), [programs, search])
   const lessonCount = programs.reduce((total, program) => total + program.lessons.length, 0)
@@ -98,15 +113,18 @@ export function AdminPage() {
 
   return (
     <div className="min-h-screen bg-[#eef0ec] text-[#111716] lg:grid lg:grid-cols-[260px_1fr]">
-      <aside className={`fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col bg-[#101817] p-5 text-white transition lg:sticky lg:top-0 lg:h-screen lg:w-auto ${menuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="flex items-center justify-between"><Link to="/"><BrandLogo light className="h-10 w-40" /></Link><button onClick={() => setMenuOpen(false)} className="grid size-9 place-items-center lg:hidden" aria-label="Close menu"><X className="size-5" /></button></div>
+      <AnimatePresence>
+        {menuOpen && <motion.button type="button" aria-label="Close admin menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.24 }} onClick={() => setMenuOpen(false)} className="fixed inset-0 z-40 bg-black/35 backdrop-blur-[2px] lg:hidden" />}
+      </AnimatePresence>
+      <aside className={`fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col bg-[#101817] p-5 text-white transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:sticky lg:top-0 lg:h-screen lg:w-auto ${menuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className="flex items-center justify-between"><Link to="/"><BrandLogo light className="h-11 w-40" /></Link><button onClick={() => setMenuOpen(false)} className="grid size-9 place-items-center lg:hidden" aria-label="Close menu"><X className="size-5" /></button></div>
         <div className="mt-9 rounded-2xl border border-white/10 bg-white/5 p-3"><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#6fe0e7]">Workspace</p><p className="mt-1 text-sm font-bold">RE:FORM Studio</p></div>
         <nav className="mt-6 grid gap-1">{navItems.map((item) => { const Icon = item.icon; return <button key={item.id} type="button" onClick={() => { setView(item.id); setMenuOpen(false) }} className={`flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-semibold transition ${view === item.id ? 'bg-[#00a6b4] text-white' : 'text-white/55 hover:bg-white/7 hover:text-white'}`}><Icon className="size-[18px]" />{item.label}</button> })}</nav>
         <div className="mt-auto border-t border-white/10 pt-4"><Link to="/" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-white/55 hover:text-white"><ArrowLeft className="size-4" />View website</Link>{user ? <button type="button" onClick={() => signOut(auth)} className="mt-1 flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-white/55 hover:text-white"><LogOut className="size-4" />Sign out</button> : null}</div>
       </aside>
 
       <div className="min-w-0">
-        <header className="sticky top-0 z-30 flex h-[74px] items-center justify-between border-b border-black/8 bg-[#eef0ec]/90 px-5 backdrop-blur-xl sm:px-8 lg:px-10"><div className="flex items-center gap-3"><button onClick={() => setMenuOpen(true)} className="grid size-10 place-items-center rounded-full border border-black/10 lg:hidden" aria-label="Open menu"><Menu className="size-5" /></button><div><p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#78837f]">Admin dashboard</p><h1 className="text-lg font-black capitalize">{navItems.find((item) => item.id === view)?.label}</h1></div></div><div className="flex items-center gap-3">{authReady && user ? <div className="hidden items-center gap-3 sm:flex"><div className="text-right"><p className="text-xs font-bold">{user.displayName || 'Admin'}</p><p className="text-[10px] text-[#7a8581]">{user.email}</p></div>{user.photoURL ? <img src={user.photoURL} alt="" className="size-9 rounded-full" /> : <span className="grid size-9 place-items-center rounded-full bg-[#00a6b4] text-xs font-bold text-white">{user.email?.[0]?.toUpperCase()}</span>}</div> : <button type="button" disabled={busy} onClick={handleSignIn} className="flex items-center gap-2 rounded-full bg-[#101817] px-4 py-2.5 text-xs font-bold text-white"><LogIn className="size-4" />Google sign in</button>}</div></header>
+        <motion.header initial={false} animate={{ y: headerVisible ? 0 : '-100%' }} transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }} onFocusCapture={showHeader} className="sticky top-0 z-30 flex h-[74px] items-center justify-between border-b border-black/8 bg-[#eef0ec]/90 px-5 shadow-[0_10px_35px_rgba(17,23,22,0.04)] backdrop-blur-xl will-change-transform sm:px-8 lg:px-10"><div className="flex items-center gap-3"><button onClick={() => setMenuOpen(true)} className="grid size-10 place-items-center rounded-full border border-black/10 lg:hidden" aria-label="Open menu"><Menu className="size-5" /></button><div><p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#78837f]">Admin dashboard</p><h1 className="text-lg font-black capitalize">{navItems.find((item) => item.id === view)?.label}</h1></div></div><div className="flex items-center gap-3">{authReady && user ? <div className="hidden items-center gap-3 sm:flex"><div className="text-right"><p className="text-xs font-bold">{user.displayName || 'Admin'}</p><p className="text-[10px] text-[#7a8581]">{user.email}</p></div>{user.photoURL ? <img src={user.photoURL} alt="" className="size-9 rounded-full" /> : <span className="grid size-9 place-items-center rounded-full bg-[#00a6b4] text-xs font-bold text-white">{user.email?.[0]?.toUpperCase()}</span>}</div> : <button type="button" disabled={busy} onClick={handleSignIn} className="flex items-center gap-2 rounded-full bg-[#101817] px-4 py-2.5 text-xs font-bold text-white"><LogIn className="size-4" />Google sign in</button>}</div></motion.header>
 
         <main className="p-5 sm:p-8 lg:p-10">
           {(notice || error) && <div className={`mb-6 flex items-start justify-between gap-4 rounded-xl border p-4 text-sm ${error ? 'border-red-200 bg-red-50 text-red-800' : 'border-teal-200 bg-teal-50 text-teal-800'}`}><p>{error || notice}</p><button onClick={() => { setError(''); setNotice('') }} aria-label="Dismiss"><X className="size-4" /></button></div>}
