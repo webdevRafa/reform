@@ -23,9 +23,9 @@ export function ProgramsPage() {
         </div>
       </section>
 
-      <section className="section-space bg-[#101817] text-white">
+      <section className="program-support-section section-space text-white">
         <div className="mx-auto max-w-[1480px] px-5 sm:px-8 lg:px-12">
-          <Reveal className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><div><p className="eyebrow text-[#6de1e8]">Every pathway includes</p><h2 className="section-title mt-5">Support for the days that do not go exactly to plan.</h2></div><div className="grid gap-3 sm:grid-cols-2">{['A clear weekly schedule', 'Exercise demonstration videos', 'Easier and harder variations', 'Progress and readiness check-ins', 'Education that reduces uncertainty', 'Guidance for adjusting a session'].map((item) => <div key={item} className="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75"><CheckCircle2 className="size-5 shrink-0 text-[#60d9e1]" />{item}</div>)}</div></Reveal>
+          <Reveal className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><div><p className="eyebrow text-[#6de1e8]">Every pathway includes</p><h2 className="section-title mt-5">Support for the days that do not go exactly to plan.</h2></div><div className="grid gap-3 sm:grid-cols-2">{['A clear weekly schedule', 'Exercise demonstration videos', 'Easier and harder variations', 'Progress and readiness check-ins', 'Education that reduces uncertainty', 'Guidance for adjusting a session'].map((item) => <div key={item} className="flex gap-3 rounded-2xl border border-white/15 bg-[#101817]/85 p-4 text-sm text-white/85 shadow-[0_18px_50px_rgba(0,0,0,.12)] backdrop-blur-md"><CheckCircle2 className="size-5 shrink-0 text-[#60d9e1]" />{item}</div>)}</div></Reveal>
         </div>
       </section>
 

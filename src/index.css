@@ -75,6 +75,32 @@ a { text-decoration: none; }
 }
 @keyframes marquee-scroll { to { transform: translate3d(-50%, 0, 0); } }
 
+.program-support-section {
+  background-color: #101817;
+}
+
+@media (min-width: 1024px) {
+  .program-support-section {
+    background-attachment: fixed;
+    background-image:
+      linear-gradient(90deg, rgba(5, 17, 16, 0.92) 0%, rgba(5, 17, 16, 0.86) 48%, rgba(5, 17, 16, 0.82) 100%),
+      url('/programs/pathway-support-desktop.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  @media (min-width: 1024px) {
+    .program-support-section {
+      background-attachment: scroll;
+      background-position: center center;
+      background-size: cover;
+    }
+  }
+}
+
 @media (max-width: 640px) {
   .page-title { line-height: 0.98; }
   .section-title { line-height: 1.02; }
