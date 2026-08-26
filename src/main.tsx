@@ -5,6 +5,8 @@ import { CatalogProvider } from './context/CatalogContext.tsx'
 import './index.css'
 import App from './App.tsx'
 
+if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>

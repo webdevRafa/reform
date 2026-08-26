@@ -12,13 +12,18 @@ const values = [
 export function AboutPage() {
   return (
     <main>
-      <section className="page-hero"><div className="mx-auto grid max-w-[1480px] gap-10 px-5 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-12"><Reveal><p className="eyebrow">Why RE:FORM exists</p><h1 className="page-title mt-6">Feeling better should open a door—not leave you at the threshold.</h1></Reveal><Reveal delay={0.08}><p className="max-w-xl text-xl leading-relaxed text-[#53615e]">RE:FORM was created by a chiropractor who saw the same gap again and again: people leave care feeling better, but still unsure how to become active, strong, and confident again.</p></Reveal></div></section>
+      <section className="py-20 sm:py-24 lg:py-24">
+        <div className="mx-auto grid max-w-[1480px] gap-10 px-5 sm:px-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-center lg:gap-16 lg:px-12">
+          <Reveal><p className="eyebrow">Why RE:FORM exists</p><h1 className="mt-6 max-w-[860px] text-[clamp(3.4rem,4.3vw,4.7rem)] font-extrabold leading-[1.01]">Feeling better should open a door—not leave you at the threshold.</h1></Reveal>
+          <Reveal delay={0.08}><p className="max-w-xl text-xl leading-relaxed text-[#53615e]">RE:FORM was created by a chiropractor who saw the same gap again and again: people leave care feeling better, but still unsure how to become active, strong, and confident again.</p></Reveal>
+        </div>
+      </section>
       <section className="pb-24 lg:pb-32">
-        <div className="mx-auto grid max-w-[1480px] gap-5 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-12">
+        <div className="mx-auto grid max-w-[1480px] gap-5 px-5 sm:px-8 lg:grid-cols-[1.18fr_0.82fr] lg:px-12">
           <Reveal className="relative min-h-[520px] overflow-hidden rounded-[2.2rem] bg-[#101817] p-8 text-white sm:p-12">
             <div className="absolute -bottom-52 -right-40 size-[38rem] rounded-full border-[110px] border-[#00a6b4]/20" />
             <p className="eyebrow text-[#6de1e8]">The central idea</p>
-            <blockquote className="relative mt-9 max-w-[760px] text-[clamp(2.9rem,4.4vw,4.9rem)] font-extrabold uppercase leading-[0.96] tracking-[-0.035em]">“You&apos;re feeling better. Now let&apos;s help you safely become strong again.”</blockquote>
+            <blockquote className="relative mt-9 max-w-[780px] text-[clamp(2.8rem,3.7vw,4.15rem)] font-extrabold uppercase leading-[0.99] tracking-[-0.025em]"><span className="block">“You&apos;re feeling better.</span><span className="mt-2 block">Now let&apos;s help you safely <span className="text-[#62dce4] lg:inline-block">become strong again.”</span></span></blockquote>
           </Reveal>
           <Reveal delay={0.08} className="flex flex-col justify-between rounded-[2.2rem] bg-[#dcefeb] p-8 sm:p-12">
             <div><p className="eyebrow">Built for the handoff</p><h2 className="mt-6 text-4xl font-black tracking-[-0.035em]">Healthcare can reduce a barrier. Training rebuilds a life around it.</h2><p className="mt-6 text-lg leading-relaxed text-[#596662]">The long-term vision is a scalable platform that people can use directly—or that healthcare providers and clinics can recommend as a structured transition back into exercise.</p></div>

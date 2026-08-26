@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react'
 import { lazy, Suspense } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import { SiteLayout } from './components/Layout'
+import { ScrollToTop } from './components/ScrollToTop'
 import { AboutPage } from './pages/AboutPage'
 import { AssessmentPage } from './pages/AssessmentPage'
 import { HomePage } from './pages/HomePage'
@@ -19,20 +20,23 @@ function NotFoundPage() {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/admin" element={<Suspense fallback={<div className="grid min-h-screen place-items-center bg-[#101817] text-sm font-bold text-white">Opening RE:FORM Studio…</div>}><AdminPage /></Suspense>} />
-      <Route path="/assessment" element={<AssessmentPage />} />
-      <Route element={<SiteLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="programs" element={<ProgramsPage />} />
-        <Route path="programs/:slug" element={<ProgramDetailPage />} />
-        <Route path="membership" element={<MembershipPage />} />
-        <Route path="learn" element={<LearnPage />} />
-        <Route path="symptoms" element={<SymptomsPage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/admin" element={<Suspense fallback={<div className="grid min-h-screen place-items-center bg-[#101817] text-sm font-bold text-white">Opening RE:FORM Studio…</div>}><AdminPage /></Suspense>} />
+        <Route path="/assessment" element={<AssessmentPage />} />
+        <Route element={<SiteLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="programs" element={<ProgramsPage />} />
+          <Route path="programs/:slug" element={<ProgramDetailPage />} />
+          <Route path="membership" element={<MembershipPage />} />
+          <Route path="learn" element={<LearnPage />} />
+          <Route path="symptoms" element={<SymptomsPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </>
   )
 }
 

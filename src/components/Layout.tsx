@@ -19,7 +19,6 @@ export function SiteLayout() {
   const { visible: headerVisible, show: showHeader } = useSmartHeader(open)
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
     showHeader()
   }, [location.pathname, showHeader])
 

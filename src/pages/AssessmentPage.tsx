@@ -1,8 +1,9 @@
 import { ArrowLeft, ArrowRight, Check, CircleAlert, RotateCcw } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCatalog } from '../context/catalog'
+import { scrollToPageTop } from '../lib/scroll'
 
 type AnswerMap = Record<string, string>
 
@@ -57,6 +58,10 @@ export function AssessmentPage() {
   const complete = step >= questions.length
   const question = questions[step]
   const selected = question ? answers[question.id] : undefined
+
+  useLayoutEffect(() => {
+    scrollToPageTop()
+  }, [step])
 
   const result = useMemo(() => {
     if (answers.safety === 'yes') return null
